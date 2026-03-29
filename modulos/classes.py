@@ -1,4 +1,5 @@
 import json
+import unicodedata
 
 
 class Produto:
@@ -109,3 +110,19 @@ class Estoque:
         else:
             maior = max(int(produto.codigo) for produto in self.produtos)
             self.contador_codigo = maior + 1
+
+    def buscar_por_nome(self, nome_busca):
+        resultados = []
+        nome_busca = self.normalizar(nome_busca)
+
+        for produto in self.produtos:
+            if nome_busca in self.normalizar(produto.nome):
+                resultados.append(produto)
+        return resultados
+
+    def normalizar(self, texto):
+        return unicodedata.normalize("NFKD", texto)\
+            .encode("ASCII", "ignore")\
+            .decode("ASCII")\
+            .lower()\
+            .strip()

@@ -1,20 +1,20 @@
 [
     {
-        "nome": "Caf\u00e9 Pil\u00e3o",
+        "nome": "Cafe Pilao",
         "tamanho": "500g",
         "quantidade": 120,
         "preco": 24.0,
         "codigo": "00001"
     },
     {
-        "nome": "Feij\u00e3o Preto Combrasil",
+        "nome": "Feijao Preto Combrasil",
         "tamanho": "1kg",
         "quantidade": 200,
         "preco": 7.99,
         "codigo": "00002"
     },
     {
-        "nome": "Arroz Tio Jo\u00e3o Branco Tipo 1",
+        "nome": "Arroz Tio Joao Branco Tipo 1",
         "tamanho": "5kg",
         "quantidade": 200,
         "preco": 25.6,
@@ -26,5 +26,12 @@
         "quantidade": 80,
         "preco": 5.6,
         "codigo": "00004"
+    },
+    {
+        "nome": "Feijao Preto Tio Joao",
+        "tamanho": "1kg",
+        "quantidade": 500,
+        "preco": 6.99,
+        "codigo": "00005"
     }
 ]
