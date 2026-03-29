@@ -1,3 +1,6 @@
+import json
+
+
 class Produto:
 
     def __init__(self, nome, tamanho, quantidade, preco, codigo):
@@ -23,6 +26,8 @@ class Estoque:
         produto = Produto(nome, tamanho, quantidade, preco, codigo)
         self.produtos.append(produto)
 
+        self.salvar_dados()
+
         print(f"Produto cadastrado com código: {codigo}")
 
     def listar_produtos(self):
@@ -44,6 +49,7 @@ class Estoque:
         if produtos:
             produtos.quantidade = int(input("Nova quantidade: "))
             produtos.preco = float(input("Nova preço: "))
+            self.salvar_dados()
         else:
             print("Produto não encontrado.")
 
@@ -52,6 +58,7 @@ class Estoque:
 
         if produtos:
             self.produtos.remove(produtos)
+            self.salvar_dados()
             print("Produto removido.")
         else:
             print("Produto não encontrado.")
@@ -63,3 +70,42 @@ class Estoque:
         codigo = f"{self.contador_codigo:05d}"
         self.contador_codigo += 1
         return codigo
+
+    def salvar_dados(self):
+        dados = []
+        for produto in self.produtos:
+            dados.append({
+                "nome": produto.nome,
+                "tamanho": produto.tamanho,
+                "quantidade": produto.quantidade,
+                "preco": produto.preco,
+                "codigo": produto.codigo
+            })
+
+        with open("database.json", "w", encoding="utf-8") as arquivo:
+            json.dump(dados, arquivo, indent=4)
+
+    def carregar_dados(self):
+        try:
+            with open("database.json", "r", encoding="utf-8") as arquivo:
+                dados = json.load(arquivo)
+                for item in dados:
+                    produto = Produto(
+                        item["nome"],
+                        item["tamanho"],
+                        item["quantidade"],
+                        item["preco"],
+                        item["codigo"]
+                    )
+                    self.produtos.append(produto)
+
+                self.atualizar_contador()
+        except FileNotFoundError:
+            print("Arquivo JSON não encontrado.")
+
+    def atualizar_contador(self):
+        if not self.produtos:
+            self.contador_codigo = 1
+        else:
+            maior = max(int(produto.codigo) for produto in self.produtos)
+            self.contador_codigo = maior + 1

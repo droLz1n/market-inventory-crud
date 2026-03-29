@@ -1,15 +1,16 @@
 from modulos.classes import Estoque, Produto
 
 estoque = Estoque()
+estoque.carregar_dados()
 
 while True:
     print("\n1 - Adicionar produto")
     print("2 - Listar produtos")
     print("3 - Atualizar produto")
     print("4 - Remover produto")
-    print("0 - Sair")
+    print("0 - Sair\n")
 
-    operacao = input("Escolha a operação desejada: ")
+    operacao = input("Escolha a operação desejada: \n")
 
     if operacao == "1":
         nome = input("Nome: ")

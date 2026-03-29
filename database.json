@@ -1,0 +1,16 @@
+[
+    {
+        "nome": "Caf\u00e9 Pil\u00e3o",
+        "tamanho": "500g",
+        "quantidade": 120,
+        "preco": 24.0,
+        "codigo": "00001"
+    },
+    {
+        "nome": "Feij\u00e3o Preto Combrasil",
+        "tamanho": "1kg",
+        "quantidade": 200,
+        "preco": 7.99,
+        "codigo": "00002"
+    }
+]
