@@ -4,15 +4,19 @@ import unicodedata
 
 class Produto:
 
-    def __init__(self, nome, tamanho, quantidade, preco, codigo):
+    def __init__(self, nome, tamanho, quantidade, preco, codigo, tipo):
         self.nome = nome
         self.tamanho = tamanho
         self.quantidade = quantidade
         self.preco = preco
         self.codigo = codigo
+        self.tipo = tipo  # unitario ou por peso
 
     def __str__(self):
-        return f'O produto {self.nome} de {self.tamanho}, de código {self.codigo}, possuí {self.quantidade} unidades e está custando {self.preco:.2f} a unidade.'
+        if self.tipo == "peso":
+            return f"[{self.codigo}] {self.nome} ({self.tamanho}) | {self.quantidade}kg | R$ {self.preco:.2f}/kg"
+        else:
+            return f"[{self.codigo}] {self.nome} ({self.tamanho}) | Qtd: {self.quantidade} | R$ {self.preco:.2f}"
 
 
 class Estoque:
@@ -21,10 +25,10 @@ class Estoque:
         self.produtos = []
         self.contador_codigo = 1
 
-    def adicionar_produto(self, nome, tamanho, quantidade, preco):
+    def adicionar_produto(self, nome, tamanho, quantidade, preco, tipo):
         codigo = self.gerar_codigo()
 
-        produto = Produto(nome, tamanho, quantidade, preco, codigo)
+        produto = Produto(nome, tamanho, quantidade, preco, codigo, tipo)
         self.produtos.append(produto)
 
         self.salvar_dados()
@@ -95,7 +99,8 @@ class Estoque:
                 "tamanho": produto.tamanho,
                 "quantidade": produto.quantidade,
                 "preco": produto.preco,
-                "codigo": produto.codigo
+                "codigo": produto.codigo,
+                "tipo": produto.tipo
             })
 
         with open("database.json", "w", encoding="utf-8") as arquivo:
@@ -111,7 +116,8 @@ class Estoque:
                         item["tamanho"],
                         item["quantidade"],
                         item["preco"],
-                        item["codigo"]
+                        item["codigo"],
+                        item.get("tipo", "unitario")
                     )
                     self.produtos.append(produto)
 

@@ -4,34 +4,71 @@
         "tamanho": "500g",
         "quantidade": 160,
         "preco": 24.0,
-        "codigo": "00001"
+        "codigo": "00001",
+        "tipo": "unitario"
     },
     {
         "nome": "Feijao Preto Combrasil",
         "tamanho": "1kg",
         "quantidade": 200,
         "preco": 7.99,
-        "codigo": "00002"
+        "codigo": "00002",
+        "tipo": "unitario"
     },
     {
         "nome": "Arroz Tio Joao Branco Tipo 1",
         "tamanho": "5kg",
         "quantidade": 200,
         "preco": 25.6,
-        "codigo": "00003"
+        "codigo": "00003",
+        "tipo": "unitario"
     },
     {
         "nome": "Farinha de Mandioca Granfino",
         "tamanho": "1kg",
         "quantidade": 80,
         "preco": 5.6,
-        "codigo": "00004"
+        "codigo": "00004",
+        "tipo": "unitario"
     },
     {
         "nome": "Feijao Preto Tio Joao",
         "tamanho": "1kg",
         "quantidade": 500,
         "preco": 6.99,
-        "codigo": "00005"
+        "codigo": "00005",
+        "tipo": "unitario"
+    },
+    {
+        "nome": "Biscoito Trakinas",
+        "tamanho": "100g",
+        "quantidade": 200,
+        "preco": 3.99,
+        "codigo": "00007",
+        "tipo": "unitario"
+    },
+    {
+        "nome": "Lagarto Bovino",
+        "tamanho": "Kg",
+        "quantidade": 80.0,
+        "preco": 27.99,
+        "codigo": "00008",
+        "tipo": "peso"
+    },
+    {
+        "nome": "Chocolate Garoto ao Leite",
+        "tamanho": "50g",
+        "quantidade": 20,
+        "preco": 7.99,
+        "codigo": "00009",
+        "tipo": "unitario"
+    },
+    {
+        "nome": "Creme Dental Colgate ",
+        "tamanho": "80g",
+        "quantidade": 15,
+        "preco": 6.99,
+        "codigo": "00010",
+        "tipo": "unitario"
     }
 ]

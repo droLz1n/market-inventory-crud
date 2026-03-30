@@ -15,11 +15,22 @@ while True:
 
     if operacao == "1":
         nome = input("Nome: ")
-        tamanho = input("Tamanho: ")
-        quantidade = int(input("Quantidade: "))
-        preco = float(input("Preço: "))
+        tipo = input("Tipo (1 = Unitário | 2 = Peso): ")
 
-        estoque.adicionar_produto(nome, tamanho, quantidade, preco)
+        if tipo == "1":
+            tipo = "unitario"
+            quantidade = int(input("Quantidade: "))
+            preco = float(input("Preço por unidade: "))
+            tamanho = input("Tamanho da Embalagem: ")
+        elif tipo == "2":
+            tipo = "peso"
+            quantidade = float(input("Quantidade em KG: "))
+            preco = float(input("Preço por KG: "))
+            tamanho = "Kg"
+        else:
+            print("Opção inválida.")
+
+        estoque.adicionar_produto(nome, tamanho, quantidade, preco, tipo)
 
     elif operacao == "2":
         estoque.listar_produtos()
