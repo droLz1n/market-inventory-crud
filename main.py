@@ -21,7 +21,7 @@ while True:
             tipo = "unitario"
             quantidade = int(input("Quantidade: "))
             preco = float(input("Preço por unidade: "))
-            tamanho = input("Tamanho da Embalagem: ")
+            tamanho = "Und."
         elif tipo == "2":
             tipo = "peso"
             quantidade = float(input("Quantidade em KG: "))
