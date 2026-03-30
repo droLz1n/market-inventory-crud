@@ -45,11 +45,26 @@ class Estoque:
         return None
 
     def atualizar_produto(self, codigo):
-        produtos = self.buscar_produto(codigo)
+        produto = self.buscar_produto(codigo)
 
-        if produtos:
-            produtos.quantidade = int(input("Nova quantidade: "))
-            produtos.preco = float(input("Nova preço: "))
+        if produto:
+            print("\nProduto encontrado:")
+            print(f"Nome: {produto.nome}")
+            print(f"Tamanho: {produto.tamanho}")
+            print(f"Quantidade: {produto.quantidade}")
+            print(f"Preço: R$ {produto.preco:.2f}")
+
+            confirmar = input("\nDeseja atualizar este produto? (s/n): ")
+
+            if confirmar.lower() != "s":
+                print("Operação cancelada.")
+                return
+
+            print("\nDigite os novos valores (ou pressione ENTER para manter):")
+
+            produto.quantidade = int(input("Nova quantidade: "))
+            produto.preco = float(input("Nova preço: "))
+
             self.salvar_dados()
         else:
             print("Produto não encontrado.")
