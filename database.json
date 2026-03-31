@@ -14,5 +14,21 @@
         "preco": 29.9,
         "codigo": "00002",
         "tipo": "peso"
+    },
+    {
+        "nome": "Banana Prata",
+        "tamanho": "Kg",
+        "quantidade": 40.0,
+        "preco": 5.99,
+        "codigo": "00003",
+        "tipo": "peso"
+    },
+    {
+        "nome": "Caf\u00e9 Melitta 500g",
+        "tamanho": "Und.",
+        "quantidade": 20,
+        "preco": 26.8,
+        "codigo": "00004",
+        "tipo": "unitario"
     }
 ]
