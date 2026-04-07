@@ -1,14 +1,14 @@
 from modulos.classes import Estoque, Produto
 
 estoque = Estoque()
-estoque.carregar_dados()
 
 while True:
     print("\n1 - Adicionar produto")
     print("2 - Listar Estoque")
     print("3 - Pesquisa por nome")
-    print("4 - Atualizar produto")
-    print("5 - Remover produto")
+    print("4 - Pesquisa por código")
+    print("5 - Atualizar produto")
+    print("6 - Remover produto")
     print("0 - Sair \n")
 
     operacao = input("Escolha a operação desejada: ")
@@ -41,17 +41,43 @@ while True:
 
         if resultado:
             for produto in resultado:
-                print(produto)
+                id, nome, tamanho, quantidade, preco, tipo = produto
+
+                if tipo == "peso":
+                    print(
+                        f"[{id}] {nome} ({tamanho}) | {quantidade}kg | R$ {preco:.2f}/kg")
+                else:
+                    print(
+                        f"[{id}] {nome} ({tamanho}) | Qtd: {quantidade} | R$ {preco:.2f}")
         else:
             print("Nenhum produto encontrado.")
 
     elif operacao == "4":
+        codigo = int(input("Digite o código do produto: "))
+        produto = estoque.buscar_produto(codigo)
+
+        if produto:
+            id, nome, tamanho, quantidade, preco, tipo = produto
+
+            if tipo == "peso":
+                print(
+                    f"[{id}] {nome} ({tamanho}) | {quantidade}kg | R$ {preco:.2f}/kg")
+            else:
+                print(
+                    f"[{id}] {nome} ({tamanho}) | Qtd: {quantidade} | R$ {preco:.2f}")
+        else:
+            print("Produto não encontrado.")
+
+    elif operacao == "5":
         codigo = input("Código do produto: ")
         estoque.atualizar_produto(codigo)
 
-    elif operacao == "5":
+    elif operacao == "6":
         codigo = input("Código do produto: ")
         estoque.remover_produto(codigo)
 
     elif operacao == "0":
         break
+
+    else:
+        print("Operação incorreta, tenta novamente.")

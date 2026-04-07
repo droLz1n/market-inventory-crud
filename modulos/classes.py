@@ -1,149 +1,104 @@
-import json
-import unicodedata
-
-
+import psycopg2
 class Produto:
 
-    def __init__(self, nome, tamanho, quantidade, preco, codigo, tipo):
+    def __init__(self, nome, tamanho, quantidade, preco, tipo):
         self.nome = nome
         self.tamanho = tamanho
         self.quantidade = quantidade
         self.preco = preco
-        self.codigo = codigo
         self.tipo = tipo  # unitario ou por peso
 
     def __str__(self):
         if self.tipo == "peso":
-            return f"[{self.codigo}] {self.nome} ({self.tamanho}) | {self.quantidade}kg | R$ {self.preco:.2f}/kg"
+            return f"[{id}]  {self.nome} ({self.tamanho}) | {self.quantidade}kg | R$ {self.preco:.2f}/kg"
         else:
-            return f"[{self.codigo}] {self.nome} ({self.tamanho}) | Qtd: {self.quantidade} | R$ {self.preco:.2f}"
+            return f"[{id}]  {self.nome} ({self.tamanho}) | Qtd: {self.quantidade} | R$ {self.preco:.2f}"
 
 
 class Estoque:
 
     def __init__(self):
-        self.produtos = []
-        self.contador_codigo = 1
+        self.conn = psycopg2.connect(
+            dbname="market_inventory",
+            user="postgres",
+            password="9999",
+            host="localhost",
+            port="5432"
+        )
+        self.cursor = self.conn.cursor()
 
     def adicionar_produto(self, nome, tamanho, quantidade, preco, tipo):
-        codigo = self.gerar_codigo()
 
-        produto = Produto(nome, tamanho, quantidade, preco, codigo, tipo)
-        self.produtos.append(produto)
+        self.cursor.execute("""
+                INSERT INTO produtos (nome, tamanho, quantidade, preco, tipo)
+                VALUES (%s, %s, %s, %s, %s)
+                RETURNING id;
+            """, (nome, tamanho, quantidade, preco, tipo))
 
-        self.salvar_dados()
+        id_gerado = self.cursor.fetchone()[0]
+        self.conn.commit()
 
-        print(f"Produto cadastrado com código: {codigo}")
+        print(f"Produto cadastrado com código: {id_gerado}")
 
     def listar_produtos(self):
-        if not self.produtos:
-            print("Estoque vazio.")
+        self.cursor.execute(
+            "SELECT id, nome, tamanho, quantidade, preco, tipo FROM produtos")
+        produtos = self.cursor.fetchall()
+
+        if not produtos:
+            print("Estoque Vazio.")
             return
-        for produto in self.produtos:
-            print(produto)
+
+        for produto in produtos:
+            id, nome, tamanho, quantidade, preco, tipo = produto
+
+            if tipo == "peso":
+                print(
+                    f"[{id}] {nome} ({tamanho}) | {quantidade}kg | R$ {preco:.2f}/kg")
+            else:
+                print(
+                    f"[{id}] {nome} ({tamanho}) | Qtd: {quantidade} | R$ {preco:.2f}")
 
     def buscar_produto(self, codigo):
-        for produto in self.produtos:
-            if produto.codigo == codigo:
-                return produto
-        return None
+        self.cursor.execute("SELECT * FROM produtos WHERE id = %s", (codigo,))
+        return self.cursor.fetchone()
 
     def atualizar_produto(self, codigo):
+
         produto = self.buscar_produto(codigo)
 
-        if produto:
-            print("\nProduto encontrado:")
-            print(f"Nome: {produto.nome}")
-            print(f"Tamanho: {produto.tamanho}")
-            print(f"Quantidade: {produto.quantidade}")
-            print(f"Preço: R$ {produto.preco:.2f}")
-
-            confirmar = input("\nDeseja atualizar este produto? (s/n): ")
-
-            if confirmar.lower() != "s":
-                print("Operação cancelada.")
-                return
-
-            print("\nDigite os novos valores (ou pressione ENTER para manter):")
-
-            produto.quantidade = int(input("Nova quantidade: "))
-            produto.preco = float(input("Nova preço: "))
-
-            self.salvar_dados()
-        else:
+        if not produto:
             print("Produto não encontrado.")
+            return
+
+        print("\nDigite os novos valores: ")
+
+        quantidade = int(input("Nova quantidade: "))
+        preco = float(input("Novo preço: "))
+
+        self.cursor.execute("""
+            UPDATE produtos
+            SET quantidade = %s, preco = %s
+            WHERE id = %s
+            """, (quantidade, preco, codigo))
+
+        self.conn.commit()
+
+        print("Produto atualizado com sucesso!")
 
     def remover_produto(self, codigo):
-        produtos = self.buscar_produto(codigo)
+        self.cursor.execute("DELETE FROM produtos WHERE id = %s", (codigo,))
+        self.conn.commit()
 
-        if produtos:
-            self.produtos.remove(produtos)
-            self.salvar_dados()
-            print("Produto removido.")
-        else:
-            print("Produto não encontrado.")
+        print("Produto removido com sucesso!")
 
-    def gerar_codigo(self):
-        if self.contador_codigo > 99999:
-            raise ValueError("Limite de códigos atingido(99999).")
+    def buscar_por_nome(self, nome):
+        nome = f"{nome}%"
 
-        codigo = f"{self.contador_codigo:05d}"
-        self.contador_codigo += 1
-        return codigo
+        self.cursor.execute("""
+            SELECT id, nome, tamanho, quantidade, preco, tipo
+            FROM produtos
+            WHERE unaccent(nome) ILIKE unaccent(%s)
+        """, (nome,))
 
-    def salvar_dados(self):
-        dados = []
-        for produto in self.produtos:
-            dados.append({
-                "nome": produto.nome,
-                "tamanho": produto.tamanho,
-                "quantidade": produto.quantidade,
-                "preco": produto.preco,
-                "codigo": produto.codigo,
-                "tipo": produto.tipo
-            })
-
-        with open("database.json", "w", encoding="utf-8") as arquivo:
-            json.dump(dados, arquivo, indent=4)
-
-    def carregar_dados(self):
-        try:
-            with open("database.json", "r", encoding="utf-8") as arquivo:
-                dados = json.load(arquivo)
-                for item in dados:
-                    produto = Produto(
-                        item["nome"],
-                        item["tamanho"],
-                        item["quantidade"],
-                        item["preco"],
-                        item["codigo"],
-                        item.get("tipo", "unitario")
-                    )
-                    self.produtos.append(produto)
-
-                self.atualizar_contador()
-        except FileNotFoundError:
-            print("Arquivo JSON não encontrado.")
-
-    def atualizar_contador(self):
-        if not self.produtos:
-            self.contador_codigo = 1
-        else:
-            maior = max(int(produto.codigo) for produto in self.produtos)
-            self.contador_codigo = maior + 1
-
-    def buscar_por_nome(self, nome_busca):
-        resultados = []
-        nome_busca = self.normalizar(nome_busca)
-
-        for produto in self.produtos:
-            if nome_busca in self.normalizar(produto.nome):
-                resultados.append(produto)
-        return resultados
-
-    def normalizar(self, texto):
-        return unicodedata.normalize("NFKD", texto)\
-            .encode("ASCII", "ignore")\
-            .decode("ASCII")\
-            .lower()\
-            .strip()
+        return self.cursor.fetchall()
