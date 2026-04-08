@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Inventory</title>
+    <link rel="stylesheet" href=".\styles\style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<!--  \   -->
+<body>
+    <div class="container">
+
+        <!-- Menu lateral -->
+        <aside class="sidebar close" id="sidebar">
+
+    <!-- Botão hamburguer -->
+    <div class="toggle" onclick="toggleMenu()">
+        <i class='bx bx-menu'></i>
+    </div>
+
+    <ul>
+        <li onclick="carregarPagina('add')">
+            <i class='bx bx-plus'></i>
+            <span class="text">Adicionar produto</span>
+        </li>
+
+        <li onclick="carregarPagina('estoque')">
+            <i class='bx bx-box'></i>
+            <span class="text">Listar estoque</span>
+        </li>
+
+        <li onclick="carregarPagina('remover')">
+            <i class='bx bx-trash'></i>
+            <span class="text">Remover produto</span>
+        </li>
+
+        <li onclick="carregarPagina('atualizar')">
+            <i class='bx bx-refresh'></i>
+            <span class="text">Atualizar produto</span>
+        </li>
+
+        <li onclick="carregarPagina('buscarNome')">
+            <i class='bx bx-search'></i>
+            <span class="text">Busca por nome</span>
+        </li>
+
+        <li onclick="carregarPagina('buscarCodigo')">
+            <i class='bx bx-barcode'></i>
+            <span class="text">Busca por código</span>
+        </li>
+    </ul>
+</aside>
+
+        <!-- Conteúdo principal -->
+        <main class="content" id="content">
+            <h1>Bem-vindo ao sistema</h1>
+            <p>Selecione uma opção no menu.</p>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
