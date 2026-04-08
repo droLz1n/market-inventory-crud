@@ -10,6 +10,10 @@ body {
     font-family: Arial, sans-serif;
 }
 
+h1 {
+    text-decoration: underline;
+}
+
 /* Container geral */
 .container {
     display: flex;
