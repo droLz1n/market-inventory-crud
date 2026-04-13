@@ -1,3 +1,4 @@
+/*Menu*/
 * {
     margin: 0;
     padding: 0;
@@ -81,4 +82,70 @@ nav.menu-lateral.expandir .txt-link {
 ul li.item-menu a .icon > i {
     font-size: 18px;
     margin-left: 9px;
+}
+
+/*Adicionar Produto*/
+
+.conteudo-principal {
+    margin-left: 60px; 
+    transition: 0.4s;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+nav.menu-lateral.expandir ~ .conteudo-principal {
+    margin-left: 300px;
+}
+
+form {
+    width: 100%;
+    max-width: 500px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+fieldset {
+    border: none;
+}
+
+form div {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select, button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #000080;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #0000a0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

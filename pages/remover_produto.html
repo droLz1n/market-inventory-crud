@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remover Produto</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/x-icon" href=".\images\favicon.png">
+</head>
+<!--  \   -->
+<body>
+    <div id="menu-container"></div>
+
+    <main class="conteudo-principal">
+        <h1>Remover produto</h1>
+        <p>Este é o conteúdo da página.</p>
+    </main>
+    <script src="/menu/menu.js"></script>
+    <script>
+        fetch('/menu/menu.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('menu-container').innerHTML = data;
+            inicializarMenu();
+        })
+        .catch(error => console.error('Erro ao carregar o menu:', error));
+    </script>
+</body>
+</html>
