@@ -56,6 +56,25 @@ const produtosMock = {
     }
 };
 
+function obterBaseProjeto() {
+    if (window.location.protocol === "file:") {
+        return "";
+    }
+
+    if (window.location.hostname.endsWith("github.io")) {
+        const segmentos = window.location.pathname.split("/").filter(Boolean);
+        return segmentos.length > 0 ? `/${segmentos[0]}` : "";
+    }
+
+    return "";
+}
+
+function resolverCaminhoProjeto(caminho) {
+    const caminhoNormalizado = caminho.replace(/^\/+/, "");
+    const baseProjeto = obterBaseProjeto();
+    return `${baseProjeto}/${caminhoNormalizado}`;
+}
+
 /* Menu lateral */
 async function carregarMenu() {
     const menuContainer = document.getElementById("menu-container");
@@ -64,9 +83,12 @@ async function carregarMenu() {
     }
 
     try {
-        const response = await fetch("/menu/menu.html");
+        const response = await fetch(resolverCaminhoProjeto("menu/menu.html"));
         const data = await response.text();
         menuContainer.innerHTML = data;
+        menuContainer.querySelectorAll("[data-caminho]").forEach((link) => {
+            link.setAttribute("href", resolverCaminhoProjeto(link.dataset.caminho));
+        });
         inicializarMenu();
     } catch (error) {
         console.error("Erro ao carregar o menu:", error);
