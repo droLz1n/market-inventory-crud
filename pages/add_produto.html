@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,44 +10,57 @@
 </head>
 <body>
     <div id="menu-container"></div>
+
     <main class="conteudo-principal">
-        <div>
-            <h1>Cadastro de Produtos</h1>
-            <br>
-        </div>
+        <section class="pagina-cadastro">
+            <div class="cabecalho-cadastro">
+                <span class="cabecalho-cadastro__tag">
+                    <i class="bi bi-box-seam"></i>
+                    Adicionar Item 
+                </span>
+                <h1>Cadastro de Produtos</h1>
+                <p>Preencha os campos abaixo para adicionar um novo produto ao seu controle de estoque.</p>
+            </div>
 
-        <form>
-            <fieldset>
-                <div>
-                    <label>Nome do Produto</label>
-                    <input type="text" nome="nome_do_produto"  id="nome_do_produto" placeholder="Nome do produto" required>
-                </div>
+            <form class="form-cadastro-produto">
+                <fieldset>
+                    <div class="grade-formulario">
+                        <div class="campo-formulario campo-formulario--grande">
+                            <label for="nome_do_produto">Nome do Produto</label>
+                            <input type="text" name="nome_do_produto" id="nome_do_produto" placeholder="Ex.: Arroz Integral" required>
+                        </div>
 
-                <div>
-                    <label>Quantidade</label>
-                    <input type="number" nome="quantidade" id="quantidade" placeholder="Quantidade" required>
-                </div>
+                        <div class="campo-formulario">
+                            <label for="quantidade">Quantidade</label>
+                            <input type="number" name="quantidade" id="quantidade" placeholder="0" min="0" required>
+                        </div>
 
-                <div>
-                    <label>Tipo</label>
-                    <select id="unidade" name="unidade" required>
-                    <option value="und">Unidade</option>
-                    <option value="kg">Kg</option>
-                    </select>
-                </div>
+                        <div class="campo-formulario">
+                            <label for="unidade">Tipo</label>
+                            <select id="unidade" name="unidade" required>
+                                <option value="" disabled selected>Selecione a unidade</option>
+                                <option value="und">Unidade</option>
+                                <option value="kg">Kg</option>
+                            </select>
+                        </div>
 
-                <div>
-                    <label>Preço do produto</label>
-                    <input type="number" name="preco" id="preco" step="0.01" min="0" placeholder="0,00" required>
-                </div>
-                
-                <div>
-                    <button type="submit">Cadastrar Produto</button>
-                </div>
-            </fieldset>
-        </form>
+                        <div class="campo-formulario campo-formulario--grande">
+                            <label for="preco">Preco do Produto</label>
+                            <input type="number" name="preco" id="preco" step="0.01" min="0" placeholder="0.00" required>
+                        </div>
+                    </div>
+
+                    <div class="rodape-formulario">
+                        <p class="rodape-formulario__texto">Revise os dados antes de salvar para manter o estoque sempre organizado.</p>
+                        <button type="submit" class="botao-principal">
+                            <i class="bi bi-plus-circle"></i>
+                            Cadastrar Produto
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
     </main>
-
 
     <script src="/menu/menu.js"></script>
     <script>
