@@ -1,30 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisa por código</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <title>Pesquisa por Código</title>
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/x-icon" href="/images/super-favicon.png">
 </head>
-<!--  \   -->
 <body>
     <div id="menu-container"></div>
 
     <main class="conteudo-principal">
-        <h1>Pesquisa por código</h1>
-        <p>Este é o conteúdo da página.</p>
+        <section class="pagina pagina">
+            <div class="cabecalho-cadastro card-gradiente-hero">
+                <span class="cabecalho-cadastro__tag">
+                    <i class="bi bi-upc-scan"></i>
+                    Busca rápida no estoque
+                </span>
+                <h1>Pesquisa por Código</h1>
+                <p>Localize um produto pelo código e visualize rapidamente os principais dados do item.</p>
+            </div>
+
+            <section class="painel painel-pesquisa-codigo">
+                <div class="painel__topo painel-atualizacao__topo">
+                    <div>
+                        <h2 class="titulo-secao-estoque">Localizar Produto</h2>
+                        <p>Para testar agora, pesquise pelos códigos fictícios <strong>101</strong>, <strong>205</strong> ou <strong>309</strong>.</p>
+                    </div>
+                </div>
+
+                <form class="busca-produto-form empilha-md" id="busca-codigo-form">
+                    <div class="campo-busca campo-coluna campo-coluna--8">
+                        <label for="pesquisa-codigo">Código do Produto</label>
+                        <div class="campo-busca__controle">
+                            <i class="bi bi-upc-scan"></i>
+                            <input type="number" id="pesquisa-codigo" name="pesquisa_codigo" placeholder="Digite o código do produto" min="1" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="botao-principal botao-busca">
+                        <i class="bi bi-search"></i>
+                        Pesquisar Produto
+                    </button>
+                </form>
+            </section>
+
+            <section class="painel painel-pesquisa-codigo painel--secundario painel-pesquisa-codigo--secundario">
+                <div class="painel__topo painel-atualizacao__topo">
+                    <div>
+                        <h2 class="titulo-secao-estoque">Resultado da Pesquisa</h2>
+                        <p>O painel abaixo exibirá as informações do produto encontrado pelo código informado.</p>
+                    </div>
+                </div>
+
+                <div class="estado-vazio estado-vazio--compacto" id="estado-busca-codigo">
+                    <div class="estado-vazio__icone icone-box">
+                        <i class="bi bi-search"></i>
+                    </div>
+                    <h3>Nenhum produto pesquisado</h3>
+                    <p>Digite um código para localizar um produto e visualizar os detalhes do item encontrado.</p>
+                </div>
+
+                <section class="resultado-busca-codigo grid-stack oculto" id="resultado-busca-codigo">
+                    <div class="resumo-produto-selecionado grid-3">
+                        <div class="resumo-produto-selecionado__item card-gradiente">
+                            <span class="resumo-card__rotulo card-label">Código</span>
+                            <strong id="resultado-codigo">-</strong>
+                        </div>
+                        <div class="resumo-produto-selecionado__item card-gradiente">
+                            <span class="resumo-card__rotulo card-label">Tipo</span>
+                            <strong id="resultado-tipo">-</strong>
+                        </div>
+                        <div class="resumo-produto-selecionado__item card-gradiente">
+                            <span class="resumo-card__rotulo card-label">Última atualização</span>
+                            <strong id="resultado-atualizacao">-</strong>
+                        </div>
+                    </div>
+
+                    <div class="grade-detalhes-codigo grid-3">
+                        <article class="card-detalhe card-branco card-detalhe--grande detalhe-codigo-card detalhe-codigo-card--grande span-1-md">
+                            <span class="detalhe-codigo-card__rotulo card-label">Produto</span>
+                            <strong id="resultado-nome">-</strong>
+                        </article>
+                        <article class="card-detalhe card-branco detalhe-codigo-card">
+                            <span class="detalhe-codigo-card__rotulo card-label">Preço</span>
+                            <strong id="resultado-preco">-</strong>
+                        </article>
+                        <article class="card-detalhe card-branco detalhe-codigo-card">
+                            <span class="detalhe-codigo-card__rotulo card-label">Quantidade</span>
+                            <strong id="resultado-quantidade">-</strong>
+                        </article>
+                        <article class="card-detalhe card-branco detalhe-codigo-card">
+                            <span class="detalhe-codigo-card__rotulo card-label">Status</span>
+                            <span class="status-produto" id="resultado-status">-</span>
+                        </article>
+                    </div>
+                </section>
+            </section>
+        </section>
     </main>
+
     <script src="/menu/menu.js"></script>
-    <script>
-        fetch('/menu/menu.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('menu-container').innerHTML = data;
-            inicializarMenu();
-        })
-        .catch(error => console.error('Erro ao carregar o menu:', error));
-    </script>
+    <script src="/script.js"></script>
 </body>
 </html>

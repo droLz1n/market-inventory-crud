@@ -1,30 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Inventory</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <title>Início</title>
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/x-icon" href="/images/super-favicon.png">
 </head>
-<!--  \   -->
 <body>
     <div id="menu-container"></div>
 
-    <main class="conteudo-principal">
-        <h1>Bem-vindo ao meu site</h1>
-        <p>Este é o conteúdo da página.</p>
+    <main class="conteudo-principal conteudo-principal--topo">
+        <section class="pagina">
+            <div class="home-hero card-gradiente-hero">
+                <div class="home-hero__conteudo">
+                    <span class="cabecalho-cadastro__tag home-hero__tag">
+                        <i class="bi bi-shop-window"></i>
+                        Painel inicial do estoque
+                    </span>
+                    <h1>Controle o seu estoque com mais clareza</h1>
+                    <p>Acompanhe rapidamente a situação atual do estoque, visualize o volume de produtos cadastrados e acesse as principais ações do sistema em um só lugar.</p>
+
+                    <div class="home-atalhos">
+                        <a href="/pages/add_produto.html" class="home-atalho-card">
+                            <i class="bi bi-plus-circle"></i>
+                            <strong>Adicionar Produto</strong>
+                            <span>Cadastre novos itens no estoque.</span>
+                        </a>
+                        <a href="/pages/listar_produto.html" class="home-atalho-card">
+                            <i class="bi bi-list-columns"></i>
+                            <strong>Ver Estoque</strong>
+                            <span>Consulte todos os produtos cadastrados.</span>
+                        </a>
+                        <a href="/pages/atualizar_produto.html" class="home-atalho-card">
+                            <i class="bi bi-arrow-repeat"></i>
+                            <strong>Atualizar Produto</strong>
+                            <span>Altere dados com segurança e controle.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="home-resumo-grid grid-3">
+                <article class="home-resumo-card card-branco card-branco--superficie">
+                    <span class="home-resumo-card__rotulo card-label">Produtos cadastrados</span>
+                    <strong id="home-total-produtos">0</strong>
+                    <p>Total atual de itens disponíveis no estoque fictício da interface.</p>
+                </article>
+                <article class="home-resumo-card home-resumo-card--destaque card-gradiente">
+                    <span class="home-resumo-card__rotulo card-label">Produtos ativos</span>
+                    <strong id="home-total-ativos">0</strong>
+                    <p>Itens prontos para movimentação e consulta no sistema.</p>
+                </article>
+                <article class="home-resumo-card card-branco card-branco--superficie">
+                    <span class="home-resumo-card__rotulo card-label">Produtos inativos</span>
+                    <strong id="home-total-inativos">0</strong>
+                    <p>Itens que exigem revisão, atualização ou reativação futura.</p>
+                </article>
+            </section>
+
+            <section class="home-paineis-grid">
+                <section class="home-painel">
+                    <div class="home-painel__topo">
+                        <div>
+                            <h2>Produtos em destaque</h2>
+                            <p>Prévia de alguns itens já disponíveis nesta interface para testes visuais e navegação.</p>
+                        </div>
+                    </div>
+                    <div class="home-lista-recentes" id="home-lista-recentes"></div>
+                </section>
+
+                <section class="home-painel home-painel--escuro">
+                    <div class="home-painel__topo">
+                        <div>
+                            <h2>Recursos do Sistema</h2>
+                            <p>Veja rapidamente quais ações já estão disponíveis nesta interface para gerenciar o estoque.</p>
+                        </div>
+                    </div>
+                    <div class="home-etapas">
+                        <article class="home-etapa-item">
+                            <span><i class="bi bi-search"></i></span>
+                            <div>
+                                <strong>Pesquisa por Nome</strong>
+                                <p>Localize rapidamente grupos de produtos relacionados, como diferentes tipos de arroz.</p>
+                            </div>
+                        </article>
+                        <article class="home-etapa-item">
+                            <span><i class="bi bi-upc-scan"></i></span>
+                            <div>
+                                <strong>Pesquisa por Código</strong>
+                                <p>Consulte um item específico e visualize seus dados principais com mais rapidez.</p>
+                            </div>
+                        </article>
+                        <article class="home-etapa-item">
+                            <span><i class="bi bi-trash3"></i></span>
+                            <div>
+                                <strong>Remoção Controlada</strong>
+                                <p>Confirme os dados do produto antes de excluir o item do estoque com mais segurança.</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </section>
+        </section>
     </main>
+
     <script src="/menu/menu.js"></script>
-    <script>
-        fetch('/menu/menu.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('menu-container').innerHTML = data;
-            inicializarMenu();
-        })
-        .catch(error => console.error('Erro ao carregar o menu:', error));
-    </script>
+    <script src="/script.js"></script>
 </body>
 </html>

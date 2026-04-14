@@ -1,30 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/x-icon" href="/images/super-favicon.png">
 </head>
-<!--  \   -->
 <body>
     <div id="menu-container"></div>
 
-    <main class="conteudo-principal">
-        <h1>Dashboard</h1>
-        <p>Este é o conteúdo da página.</p>
+    <main class="conteudo-principal conteudo-principal--topo">
+        <section class="pagina pagina">
+            <div class="cabecalho-cadastro card-gradiente-hero">
+                <span class="cabecalho-cadastro__tag">
+                    <i class="bi bi-columns-gap"></i>
+                    Visão estratégica do estoque
+                </span>
+                <h1>Dashboard</h1>
+                <p>Acompanhe os principais indicadores do estoque, visualize a distribuição dos produtos e consulte rapidamente os itens com maior volume e as últimas atualizações.</p>
+            </div>
+
+            <section class="dashboard-indicadores-grid">
+                <article class="dashboard-indicador-card card-branco card-branco--superficie">
+                    <span class="dashboard-indicador-card__rotulo card-label">Produtos cadastrados</span>
+                    <strong id="dashboard-total-produtos">0</strong>
+                    <p>Total atual de itens presentes no estoque fictício da interface.</p>
+                </article>
+                <article class="dashboard-indicador-card dashboard-indicador-card--destaque card-gradiente">
+                    <span class="dashboard-indicador-card__rotulo card-label">Valor estimado do estoque</span>
+                    <strong id="dashboard-valor-estoque">R$ 0,00</strong>
+                    <p>Soma estimada com base no preço e na quantidade dos produtos cadastrados.</p>
+                </article>
+                <article class="dashboard-indicador-card card-branco card-branco--superficie">
+                    <span class="dashboard-indicador-card__rotulo card-label">Produtos ativos</span>
+                    <strong id="dashboard-total-ativos">0</strong>
+                    <p>Itens disponíveis para movimentação e consulta no sistema.</p>
+                </article>
+                <article class="dashboard-indicador-card card-branco card-branco--superficie">
+                    <span class="dashboard-indicador-card__rotulo card-label">Produtos inativos</span>
+                    <strong id="dashboard-total-inativos">0</strong>
+                    <p>Itens que exigem revisão, atualização ou futura reativação.</p>
+                </article>
+            </section>
+
+            <section class="dashboard-grade-principal">
+                <section class="dashboard-painel dashboard-painel--grafico">
+                    <div class="dashboard-painel__topo">
+                        <div>
+                            <h2>Status do Estoque</h2>
+                            <p>Resumo visual da proporção entre produtos ativos e inativos nesta base fictícia.</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-status-visual">
+                        <div class="dashboard-status-anel" id="dashboard-status-anel">
+                            <div class="dashboard-status-anel__centro">
+                                <strong id="dashboard-total-produtos-visual">6</strong>
+                                <span>produtos</span>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-status-legenda">
+                            <article class="dashboard-legenda-item">
+                                <span class="dashboard-legenda-item__cor dashboard-legenda-item__cor--ativo"></span>
+                                <div>
+                                    <strong>Ativos</strong>
+                                    <p>Produtos disponíveis para consulta e movimentação.</p>
+                                </div>
+                            </article>
+                            <article class="dashboard-legenda-item">
+                                <span class="dashboard-legenda-item__cor dashboard-legenda-item__cor--inativo"></span>
+                                <div>
+                                    <strong>Inativos</strong>
+                                    <p>Produtos temporariamente fora da operação ativa.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dashboard-painel">
+                    <div class="dashboard-painel__topo">
+                        <div>
+                            <h2>Maior Quantidade em Estoque</h2>
+                            <p>Produtos com maior volume atual, úteis para acompanhamento rápido.</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-lista" id="dashboard-top-quantidade"></div>
+                </section>
+            </section>
+
+            <section class="dashboard-painel dashboard-painel--secundario">
+                <div class="dashboard-painel__topo">
+                    <div>
+                        <h2>Últimas Atualizações</h2>
+                        <p>Itens mais recentes com base na data fictícia de atualização disponível na interface.</p>
+                    </div>
+                </div>
+                <div class="dashboard-atualizacoes-grid" id="dashboard-ultimas-atualizacoes"></div>
+            </section>
+        </section>
     </main>
+
     <script src="/menu/menu.js"></script>
-    <script>
-        fetch('/menu/menu.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('menu-container').innerHTML = data;
-            inicializarMenu();
-        })
-        .catch(error => console.error('Erro ao carregar o menu:', error));
-    </script>
+    <script src="/script.js"></script>
 </body>
 </html>

@@ -1,30 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesquisa por Nome</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/x-icon" href="/images/super-favicon.png">
 </head>
-<!--  \   -->
 <body>
     <div id="menu-container"></div>
 
     <main class="conteudo-principal">
-        <h1>Pesquisa por nome</h1>
-        <p>Este é o conteúdo da página.</p>
+        <section class="pagina pagina">
+            <div class="cabecalho-cadastro card-gradiente-hero">
+                <span class="cabecalho-cadastro__tag">
+                    <i class="bi bi-search-heart"></i>
+                    Busca inteligente no estoque
+                </span>
+                <h1>Pesquisa por Nome</h1>
+                <p>Pesquise por parte do nome do produto e visualize todos os itens relacionados encontrados no estoque, em uma lista prática e preparada para muitos resultados.</p>
+            </div>
+
+            <section class="painel painel-pesquisa-nome">
+                <div class="painel__topo painel-atualizacao__topo">
+                    <div>
+                        <h2 class="titulo-secao-estoque">Localizar Produtos</h2>
+                        <p>Para testar agora, pesquise por termos como <strong>Arroz</strong>, <strong>Feijão</strong> ou <strong>Macarrão</strong>.</p>
+                    </div>
+                </div>
+
+                <form class="busca-produto-form empilha-md" id="busca-nome-form">
+                    <div class="campo-busca campo-coluna campo-coluna--8">
+                        <label for="pesquisa-nome">Nome do Produto</label>
+                        <div class="campo-busca__controle">
+                            <i class="bi bi-search"></i>
+                            <input type="text" id="pesquisa-nome" name="pesquisa_nome" placeholder="Digite o nome ou parte do nome do produto" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="botao-principal botao-busca">
+                        <i class="bi bi-search"></i>
+                        Pesquisar Produtos
+                    </button>
+                </form>
+            </section>
+
+            <section class="painel painel-pesquisa-nome painel--secundario painel-pesquisa-nome--secundario">
+                <div class="painel__topo painel-atualizacao__topo">
+                    <div>
+                        <h2 class="titulo-secao-estoque">Resultados Encontrados</h2>
+                        <p>Os itens encontrados serão exibidos abaixo em ordem de código, nome, quantidade e status, um embaixo do outro.</p>
+                    </div>
+                    <div class="resumo-card resumo-card--claro card-branco oculto" id="resumo-resultado-nome">
+                        <span class="resumo-card__rotulo card-label">Total encontrado</span>
+                        <strong id="total-resultados-nome">0 resultado(s)</strong>
+                    </div>
+                </div>
+
+                <div class="estado-vazio estado-vazio--compacto" id="estado-busca-nome">
+                    <div class="estado-vazio__icone icone-box">
+                        <i class="bi bi-search"></i>
+                    </div>
+                    <h3>Nenhuma pesquisa realizada</h3>
+                    <p>Digite parte do nome de um produto para visualizar todos os itens relacionados encontrados no estoque.</p>
+                </div>
+
+                <section class="resultado-busca-nome oculto" id="resultado-busca-nome">
+                    <div class="cabecalho-lista-nome card-label">
+                        <span>Código</span>
+                        <span>Nome</span>
+                        <span>Quantidade</span>
+                        <span>Status</span>
+                    </div>
+                    <div class="lista-resultados-nome" id="lista-resultados-nome"></div>
+                </section>
+            </section>
+        </section>
     </main>
+
     <script src="/menu/menu.js"></script>
-    <script>
-        fetch('/menu/menu.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('menu-container').innerHTML = data;
-            inicializarMenu();
-        })
-        .catch(error => console.error('Erro ao carregar o menu:', error));
-    </script>
+    <script src="/script.js"></script>
 </body>
 </html>

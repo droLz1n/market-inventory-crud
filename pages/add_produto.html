@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -11,31 +11,31 @@
 <body>
     <div id="menu-container"></div>
 
-    <main class="conteudo-principal">
-        <section class="pagina-cadastro">
-            <div class="cabecalho-cadastro">
+    <main class="conteudo-principal conteudo-principal--topo">
+        <section class="pagina pagina">
+            <div class="cabecalho-cadastro card-gradiente-hero">
                 <span class="cabecalho-cadastro__tag">
                     <i class="bi bi-box-seam"></i>
-                    Adicionar Item 
+                    Adicionar Item
                 </span>
                 <h1>Cadastro de Produtos</h1>
                 <p>Preencha os campos abaixo para adicionar um novo produto ao seu controle de estoque.</p>
             </div>
 
-            <form class="form-cadastro-produto">
+            <form class="painel form-cadastro-produto">
                 <fieldset>
-                    <div class="grade-formulario">
-                        <div class="campo-formulario campo-formulario--grande">
+                    <div class="grade-formulario empilha-md">
+                        <div class="campo-formulario campo-coluna campo-coluna--8 campo-formulario--grande span-1-md">
                             <label for="nome_do_produto">Nome do Produto</label>
                             <input type="text" name="nome_do_produto" id="nome_do_produto" placeholder="Ex.: Arroz Integral" required>
                         </div>
 
-                        <div class="campo-formulario">
+                        <div class="campo-formulario campo-coluna campo-coluna--8">
                             <label for="quantidade">Quantidade</label>
                             <input type="number" name="quantidade" id="quantidade" placeholder="0" min="0" required>
                         </div>
 
-                        <div class="campo-formulario">
+                        <div class="campo-formulario campo-coluna campo-coluna--8">
                             <label for="unidade">Tipo</label>
                             <select id="unidade" name="unidade" required>
                                 <option value="" disabled selected>Selecione a unidade</option>
@@ -44,8 +44,8 @@
                             </select>
                         </div>
 
-                        <div class="campo-formulario campo-formulario--grande">
-                            <label for="preco">Preco do Produto</label>
+                        <div class="campo-formulario campo-coluna campo-coluna--8 campo-formulario--grande span-1-md">
+                            <label for="preco">Preço do Produto</label>
                             <input type="number" name="preco" id="preco" step="0.01" min="0" placeholder="0.00" required>
                         </div>
                     </div>
@@ -63,14 +63,6 @@
     </main>
 
     <script src="/menu/menu.js"></script>
-    <script>
-        fetch('/menu/menu.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('menu-container').innerHTML = data;
-            inicializarMenu();
-        })
-        .catch(error => console.error('Erro ao carregar o menu:', error));
-    </script>
+    <script src="/script.js"></script>
 </body>
 </html>

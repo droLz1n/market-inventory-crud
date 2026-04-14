@@ -1,30 +1,144 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualizar Produto</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/x-icon" href="/images/super-favicon.png">
 </head>
-<!--  \   -->
 <body>
     <div id="menu-container"></div>
 
     <main class="conteudo-principal">
-        <h1>Atualizar Produto</h1>
-        <p>Este é o conteúdo da página.</p>
+        <section class="pagina pagina">
+            <div class="cabecalho-cadastro card-gradiente-hero">
+                <span class="cabecalho-cadastro__tag">
+                    <i class="bi bi-arrow-repeat"></i>
+                    Atualização segura de estoque
+                </span>
+                <h1>Atualizar Produto</h1>
+                <p>Pesquise um item pelo código e altere apenas os campos que forem liberados manualmente, trazendo mais segurança para a edição.</p>
+            </div>
+
+            <section class="painel painel-atualizacao">
+                <div class="painel__topo painel-atualizacao__topo">
+                    <div>
+                        <h2 class="titulo-secao-estoque">Pesquisar por Código</h2>
+                        <p>Para testar o fluxo agora, pesquise pelos códigos fictícios <strong>101</strong>, <strong>205</strong> ou <strong>309</strong>. Depois essa busca será ligada à FastAPI com PostgreSQL.</p>
+                    </div>
+                </div>
+
+                <form class="busca-produto-form empilha-md" id="busca-produto-form">
+                    <div class="campo-busca campo-coluna campo-coluna--8">
+                        <label for="codigo-produto">Código do Produto</label>
+                        <div class="campo-busca__controle">
+                            <i class="bi bi-upc-scan"></i>
+                            <input type="number" id="codigo-produto" name="codigo_produto" placeholder="Digite o código do produto" min="1" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="botao-principal botao-busca">
+                        <i class="bi bi-search"></i>
+                        Buscar Produto
+                    </button>
+                </form>
+            </section>
+
+            <section class="painel painel-atualizacao painel--secundario painel-atualizacao--secundario">
+                <div class="painel__topo painel-atualizacao__topo">
+                    <div>
+                        <h2 class="titulo-secao-estoque">Produto Selecionado</h2>
+                        <p>Os campos permanecem bloqueados por padrão. Marque a caixa ao lado do item que deseja alterar para habilitar a edição.</p>
+                    </div>
+                </div>
+
+                <div class="estado-vazio estado-vazio--compacto" id="estado-produto">
+                    <div class="estado-vazio__icone icone-box">
+                        <i class="bi bi-box"></i>
+                    </div>
+                    <h3>Nenhum produto selecionado</h3>
+                    <p>Depois da busca, o produto encontrado aparecerá aqui com nome, preço e quantidade prontos para edição controlada.</p>
+                </div>
+
+                <form class="form-atualizacao-produto grid-stack oculto" id="form-atualizacao-produto">
+                    <div class="resumo-produto-selecionado grid-3">
+                        <div class="resumo-produto-selecionado__item card-gradiente">
+                            <span class="resumo-card__rotulo card-label">Código</span>
+                            <strong id="produto-codigo">-</strong>
+                        </div>
+                        <div class="resumo-produto-selecionado__item card-gradiente">
+                            <span class="resumo-card__rotulo card-label">Tipo</span>
+                            <strong id="produto-tipo">-</strong>
+                        </div>
+                        <div class="resumo-produto-selecionado__item card-gradiente">
+                            <span class="resumo-card__rotulo card-label">Última atualização</span>
+                            <strong id="produto-atualizacao">12/04/2026</strong>
+                        </div>
+                    </div>
+
+                    <div class="grade-atualizacao grid-3">
+                        <div class="campo-atualizacao campo-coluna campo-coluna--10 campo-atualizacao--grande span-1-md">
+                            <div class="campo-atualizacao__cabecalho">
+                                <label for="editar-nome">Nome do Produto</label>
+                                <label class="controle-edicao">
+                                    <input type="checkbox" data-target="editar-nome">
+                                    <span>Liberar edição</span>
+                                </label>
+                            </div>
+                            <input type="text" id="editar-nome" name="nome" disabled>
+                        </div>
+
+                        <div class="campo-atualizacao campo-coluna campo-coluna--10">
+                            <div class="campo-atualizacao__cabecalho">
+                                <label for="editar-preco">Preço</label>
+                                <label class="controle-edicao">
+                                    <input type="checkbox" data-target="editar-preco">
+                                    <span>Liberar edição</span>
+                                </label>
+                            </div>
+                            <input type="number" id="editar-preco" name="preco" step="0.01" min="0" disabled>
+                        </div>
+
+                        <div class="campo-atualizacao campo-coluna campo-coluna--10">
+                            <div class="campo-atualizacao__cabecalho">
+                                <label for="editar-quantidade">Quantidade</label>
+                                <label class="controle-edicao">
+                                    <input type="checkbox" data-target="editar-quantidade">
+                                    <span>Liberar edição</span>
+                                </label>
+                            </div>
+                            <input type="number" id="editar-quantidade" name="quantidade" step="0.01" min="0" disabled>
+                        </div>
+
+                        <div class="campo-atualizacao campo-coluna campo-coluna--10">
+                            <div class="campo-atualizacao__cabecalho">
+                                <label for="editar-status">Status</label>
+                                <label class="controle-edicao">
+                                    <input type="checkbox" data-target="editar-status">
+                                    <span>Liberar edição</span>
+                                </label>
+                            </div>
+                            <select id="editar-status" name="status" disabled>
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="rodape-formulario">
+                        <p class="rodape-formulario__texto">Por segurança, apenas os campos marcados poderão ser alterados antes do envio para a API.</p>
+                        <button type="submit" class="botao-principal">
+                            <i class="bi bi-save"></i>
+                            Salvar Alterações
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </section>
     </main>
+
     <script src="/menu/menu.js"></script>
-    <script>
-        fetch('/menu/menu.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('menu-container').innerHTML = data;
-            inicializarMenu();
-        })
-        .catch(error => console.error('Erro ao carregar o menu:', error));
-    </script>
+    <script src="/script.js"></script>
 </body>
 </html>

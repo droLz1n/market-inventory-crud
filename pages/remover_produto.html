@@ -1,30 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remover Produto</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/x-icon" href="/images/super-favicon.png">
 </head>
-<!--  \   -->
 <body>
     <div id="menu-container"></div>
 
     <main class="conteudo-principal">
-        <h1>Remover produto</h1>
-        <p>Este é o conteúdo da página.</p>
+        <section class="pagina pagina">
+            <div class="cabecalho-cadastro card-gradiente-hero">
+                <span class="cabecalho-cadastro__tag">
+                    <i class="bi bi-trash3"></i>
+                    Remoção controlada de estoque
+                </span>
+                <h1>Remover Produto</h1>
+                <p>Pesquise um produto pelo código, confira os dados do item encontrado e faça a remoção do estoque de forma clara e segura.</p>
+            </div>
+
+            <section class="painel painel-remocao-produto">
+                <div class="painel__topo painel-atualizacao__topo">
+                    <div>
+                        <h2 class="titulo-secao-estoque">Localizar Produto</h2>
+                        <p>Para testar agora, pesquise códigos fictícios como <strong>101</strong>, <strong>205</strong>, <strong>309</strong> ou <strong>412</strong>.</p>
+                    </div>
+                </div>
+
+                <form class="busca-produto-form empilha-md" id="busca-remocao-form">
+                    <div class="campo-busca campo-coluna campo-coluna--8">
+                        <label for="codigo-remocao">Código do Produto</label>
+                        <div class="campo-busca__controle">
+                            <i class="bi bi-upc-scan"></i>
+                            <input type="number" id="codigo-remocao" name="codigo_remocao" placeholder="Digite o código do produto" min="1" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="botao-principal botao-busca">
+                        <i class="bi bi-search"></i>
+                        Buscar Produto
+                    </button>
+                </form>
+            </section>
+
+            <section class="painel painel-remocao-produto painel--secundario painel-remocao-produto--secundario">
+                <div class="painel__topo painel-atualizacao__topo">
+                    <div>
+                        <h2 class="titulo-secao-estoque">Produto Selecionado</h2>
+                        <p>Confira os dados antes de remover. Nesta etapa visual, a exclusão é simulada apenas na interface com os produtos fictícios.</p>
+                    </div>
+                </div>
+
+                <div class="estado-vazio estado-vazio--compacto" id="estado-remocao">
+                    <div class="estado-vazio__icone icone-box">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+                    <h3>Nenhum produto selecionado</h3>
+                    <p>Pesquise um código para visualizar o produto que poderá ser removido do estoque.</p>
+                </div>
+
+                <div class="estado-vazio estado-vazio--compacto oculto" id="mensagem-remocao">
+                    <div class="estado-vazio__icone icone-box estado-vazio__icone--sucesso">
+                        <i class="bi bi-check2-circle"></i>
+                    </div>
+                    <h3>Produto removido com sucesso</h3>
+                    <p>O item removido será informado aqui após a confirmação da exclusão.</p>
+                </div>
+
+                <section class="painel-produto-remocao grid-stack oculto" id="painel-produto-remocao">
+                    <div class="resumo-produto-selecionado grid-3">
+                        <div class="resumo-produto-selecionado__item card-gradiente">
+                            <span class="resumo-card__rotulo card-label">Código</span>
+                            <strong id="remover-codigo">-</strong>
+                        </div>
+                        <div class="resumo-produto-selecionado__item card-gradiente">
+                            <span class="resumo-card__rotulo card-label">Tipo</span>
+                            <strong id="remover-tipo">-</strong>
+                        </div>
+                        <div class="resumo-produto-selecionado__item card-gradiente">
+                            <span class="resumo-card__rotulo card-label">Última atualização</span>
+                            <strong id="remover-atualizacao">-</strong>
+                        </div>
+                    </div>
+
+                    <div class="grade-remocao-produto grid-3">
+                        <article class="card-detalhe card-branco card-detalhe--grande detalhe-remocao-card detalhe-remocao-card--grande span-1-md">
+                            <span class="detalhe-remocao-card__rotulo card-label">Nome do Produto</span>
+                            <strong id="remover-nome">-</strong>
+                        </article>
+                        <article class="card-detalhe card-branco detalhe-remocao-card">
+                            <span class="detalhe-remocao-card__rotulo card-label">Quantidade</span>
+                            <strong id="remover-quantidade">-</strong>
+                        </article>
+                        <article class="card-detalhe card-branco detalhe-remocao-card">
+                            <span class="detalhe-remocao-card__rotulo card-label">Status</span>
+                            <span class="status-produto" id="remover-status">-</span>
+                        </article>
+                    </div>
+
+                    <div class="alerta-remocao">
+                        <div class="alerta-remocao__icone icone-box">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <div>
+                            <strong>Atenção</strong>
+                            <p>Esta ação remove o produto exibido acima do estoque, não será possível recuperar este produto, ele será excluído permanentemente.</p>
+                        </div>
+                    </div>
+
+                    <div class="rodape-formulario">
+                        <p class="rodape-formulario__texto">Revise o produto encontrado antes de confirmar a remoção.</p>
+                        <button type="button" class="botao-principal botao-principal--perigo" id="botao-confirmar-remocao">
+                            <i class="bi bi-trash3"></i>
+                            Remover Produto
+                        </button>
+                    </div>
+                </section>
+            </section>
+        </section>
     </main>
+
     <script src="/menu/menu.js"></script>
-    <script>
-        fetch('/menu/menu.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('menu-container').innerHTML = data;
-            inicializarMenu();
-        })
-        .catch(error => console.error('Erro ao carregar o menu:', error));
-    </script>
+    <script src="/script.js"></script>
 </body>
 </html>
