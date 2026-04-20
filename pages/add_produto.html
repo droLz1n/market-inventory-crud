@@ -46,7 +46,19 @@
 
                         <div class="campo-formulario campo-coluna campo-coluna--8 campo-formulario--grande span-1-md">
                             <label for="preco">Preço do Produto</label>
-                            <input type="number" name="preco" id="preco" step="0.01" min="0" placeholder="0.00" required>
+                            <div class="campo-moeda">
+                                <span class="campo-moeda__prefixo">R$</span>
+                                <input
+                                    type="text"
+                                    name="preco"
+                                    id="preco"
+                                    class="campo-moeda__input"
+                                    inputmode="decimal"
+                                    placeholder="0,00"
+                                    data-campo-preco
+                                    required
+                                >
+                            </div>
                         </div>
                     </div>
 

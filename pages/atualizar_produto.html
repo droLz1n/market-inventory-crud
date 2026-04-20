@@ -26,7 +26,7 @@
                 <div class="painel__topo painel-atualizacao__topo">
                     <div>
                         <h2 class="titulo-secao-estoque">Pesquisar por Código</h2>
-                        <p>Para testar o fluxo agora, pesquise pelos códigos fictícios <strong>101</strong>, <strong>205</strong> ou <strong>309</strong>. Depois essa busca será ligada à FastAPI com PostgreSQL.</p>
+                        <p>Digite o código de um produto cadastrado para carregar os dados direto da API e editar apenas os campos liberados.</p>
                     </div>
                 </div>
 
@@ -97,7 +97,19 @@
                                     <span>Liberar edição</span>
                                 </label>
                             </div>
-                            <input type="number" id="editar-preco" name="preco" step="0.01" min="0" disabled>
+                            <div class="campo-moeda campo-moeda--desabilitado">
+                                <span class="campo-moeda__prefixo">R$</span>
+                                <input
+                                    type="text"
+                                    id="editar-preco"
+                                    name="preco"
+                                    class="campo-moeda__input"
+                                    inputmode="decimal"
+                                    placeholder="0,00"
+                                    data-campo-preco
+                                    disabled
+                                >
+                            </div>
                         </div>
 
                         <div class="campo-atualizacao campo-coluna campo-coluna--10">
